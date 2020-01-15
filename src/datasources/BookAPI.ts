@@ -1,6 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest'
-import Book from '../models/book/Book'
-import CreateBookInput from '../models/book/CreateBookInput'
+import { Book, CreateBookInput } from '../types'
 
 export default class BookAPI extends RESTDataSource {
   constructor() {
@@ -9,13 +8,10 @@ export default class BookAPI extends RESTDataSource {
   }
 
   async getBooks(): Promise<Book[]> {
-    const response = await this.get('/books')
-    return response
+    return await this.get('/books')
   }
 
   async createBook(input: CreateBookInput): Promise<Book> {
-    const response = await this.post('/books', { title: input.title, authorId: input.authorId })
-    console.log(response)
-    return response
+    return await this.post('/books', { title: input.title, authorId: input.authorId })
   }
 }

@@ -1,5 +1,5 @@
 import { RESTDataSource } from 'apollo-datasource-rest'
-import Author from '../models/Author'
+import { Author } from '../types'
 
 export default class AuthorAPI extends RESTDataSource {
   constructor() {

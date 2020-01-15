@@ -1,6 +1,6 @@
 import BookAPI from "./datasources/BookAPI"
 import AuthorAPI from "./datasources/AuthorAPI"
-import CreateBookInput from './models/book/CreateBookInput'
+import { CreateBookInput } from './types'
 
 interface DataSources {
   bookAPI: BookAPI,
