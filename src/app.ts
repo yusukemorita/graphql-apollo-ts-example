@@ -11,7 +11,7 @@ const typeDefs = importSchema('src/graphql/schema.graphql')
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-  dataSources: () => ({
+  dataSources: (): { bookAPI: BookAPI, authorAPI: AuthorAPI } => ({
     bookAPI: new BookAPI(),
     authorAPI: new AuthorAPI()
   })

@@ -1,33 +1,33 @@
 import BookAPI from "./datasources/BookAPI"
 import AuthorAPI from "./datasources/AuthorAPI"
-import { CreateBookInput } from './types'
+import { Author, Book, CreateBookInput } from './types'
 
 interface DataSources {
-  bookAPI: BookAPI,
+  bookAPI: BookAPI
   authorAPI: AuthorAPI
 }
 
 const resolvers = {
   Query: {
-    books: (_: null, __: null, { dataSources }: { dataSources: DataSources }) => {
+    books: (_: null, __: null, { dataSources }: { dataSources: DataSources }): Promise<Book[]> => {
       return dataSources.bookAPI.getBooks()
     },
-    authors: (_: null, __: null, { dataSources }: { dataSources: DataSources }) => {
+    authors: (_: null, __: null, { dataSources }: { dataSources: DataSources }): Promise<Author[]> => {
       return dataSources.authorAPI.getAuthors()
     },
-    author: (_: null, { id }: { id: number }, { dataSources }: { dataSources: DataSources }) => {
+    author: (_: null, { id }: { id: number }, { dataSources }: { dataSources: DataSources }): Promise<Author> => {
       return dataSources.authorAPI.getAuthor(id)
     },
   },
 
   Book: {
-    author({ authorId }: { authorId: number }, _: null, { dataSources }: { dataSources: DataSources }) {
+    author({ authorId }: { authorId: number }, _: null, { dataSources }: { dataSources: DataSources }): Promise<Author> {
       return dataSources.authorAPI.getAuthor(authorId)
     }
   },
 
   Mutation: {
-    createBook: async (_: null, { input }: { input: CreateBookInput }, { dataSources }: { dataSources: DataSources }) => {
+    createBook: async (_: null, { input }: { input: CreateBookInput }, { dataSources }: { dataSources: DataSources }): Promise<Book> => {
       const book = dataSources.bookAPI.createBook(input)
       return book
     }
