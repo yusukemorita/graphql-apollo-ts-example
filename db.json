@@ -1,0 +1,25 @@
+{
+  "books": [
+    {
+      "id": 1,
+      "title": "json-server",
+      "author_id": 10
+    },
+    {
+      "id": 2,
+      "title": "Harry Potter and the Philosopher's Stone'",
+      "author_id": 11
+    }
+  ],
+  "authors": [
+    {
+      "id": 10,
+      "name": "Shakespeare"
+    },
+    {
+      "id": 11,
+      "name": "J.K. Rowling"
+    }
+  ]
+}
+
