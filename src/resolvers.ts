@@ -1,30 +1,11 @@
 import BookAPI from "./datasources/BookAPI"
 import AuthorAPI from "./datasources/AuthorAPI"
-import Book from './models/book'
-
-// Resolvers define the technique for fetching the types defined in the
-// schema. This resolver retrieves books from the "books" array above.
-
-interface CreateBookInput {
-  title: string
-  author: string
-}
+import CreateBookInput from './models/book/CreateBookInput'
 
 interface DataSources {
   bookAPI: BookAPI,
   authorAPI: AuthorAPI
 }
-
-const books = [
-  {
-    title: 'Harry Potter and the Chamber of Secrets',
-    author: 'J.K. Rowling',
-  },
-  {
-    title: 'Jurassic Park',
-    author: 'Michael Crichton',
-  }
-]
 
 const resolvers = {
   Query: {
@@ -40,15 +21,14 @@ const resolvers = {
   },
 
   Book: {
-    author({ author_id }: { author_id: number }, _: null, { dataSources }: { dataSources: DataSources }) {
-      return dataSources.authorAPI.getAuthor(author_id)
+    author({ authorId }: { authorId: number }, _: null, { dataSources }: { dataSources: DataSources }) {
+      return dataSources.authorAPI.getAuthor(authorId)
     }
   },
 
   Mutation: {
-    createBook: (_: null, { input }: { input: CreateBookInput }) => {
-      const book = { title: input.title, author: input.author }
-      books.push(book)
+    createBook: async (_: null, { input }: { input: CreateBookInput }, { dataSources }: { dataSources: DataSources }) => {
+      const book = dataSources.bookAPI.createBook(input)
       return book
     }
   }

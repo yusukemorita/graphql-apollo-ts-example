@@ -1,8 +1,10 @@
 import { ApolloServer } from 'apollo-server'
-import typeDefs from './schema'
+import { importSchema } from 'graphql-import'
 import resolvers from './resolvers'
 import BookAPI from './datasources/BookAPI'
 import AuthorAPI from './datasources/AuthorAPI'
+
+const typeDefs = importSchema('src/graphql/schema.graphql')
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.

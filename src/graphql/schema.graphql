@@ -1,0 +1,14 @@
+# import Author from "author/Author.graphql"
+
+# import Book from "book/Book.graphql"
+# import CreateBookInput from "book/CreateBookInput.graphql"
+
+type Query {
+  books: [Book]
+  authors: [Author]
+  author(id: Int): Author
+}
+
+type Mutation {
+  createBook(input: CreateBookInput): Book
+}
